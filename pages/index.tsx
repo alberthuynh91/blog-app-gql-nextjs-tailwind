@@ -1,38 +1,38 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { PostCard, Categories, PostWidget } from './components' 
+import type { NextPage } from 'next';
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import { Item } from '../components';
+import Link from 'next/link';
 
-const posts = [
-  { title: 'React Testing', excerpt: 'Learn React Testing' },
-  { title: 'React with Tailwind', excerpt: 'Learn React with Tailwind' },
-];
+const Home: NextPage = ({ items }) => {
+  const initialCart =
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('cart'))
+      : {};
 
+  const [cart, setCart] = useState(initialCart);
 
-const Home: NextPage = () => {
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
-        <title>CMS Blog</title>
+        <title>React Shopping Cart</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        <div className="lg:col-span-8 col-span-1">
-        {posts.map((post, index) => {
-          return(
-            <PostCard post={post} key={post.title} />
-          )  
+      <h1 className="mb-4 text-4xl font-extrabold">Bert's Grocery Store</h1>
+      <div className="flex">
+        {items.map((item) => {
+          return <Item item={item} cart={cart} setCart={setCart} />;
         })}
-        </div>
-        <div className="lg:col-span-4 col-span-1">
-          <div className="lg:stricky relative top-8">
-            <PostWidget />
-            <Categories />
-          </div>
-        </div>
       </div>
+      <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+        <Link href={`/cart`}>Go to cart</Link>
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
