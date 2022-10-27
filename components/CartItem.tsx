@@ -3,23 +3,20 @@ import Link from 'next/link';
 
 const CartItem = ({ item, cart, setCart }) => {
   useEffect(() => {
-    console.log('setting cart in localStorage: ', cart);
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const handleRemove = (item) => {
-    const temp = Object.assign({}, cart);
-    console.log(`what is item when removing: `, item);
-    console.log(`what is temp cart when removing: `, temp);
-    const itemToRemove = temp[item.id];
+    const cartCopy = Object.assign({}, cart);
+    const itemToRemove = cartCopy[item.id];
     if (itemToRemove) {
       if (itemToRemove.quantity === 1) {
-        delete temp[item.id];
+        delete cartCopy[item.id];
       } else {
         itemToRemove.quantity--;
       }
     }
-    setCart(temp);
+    setCart(cartCopy);
   };
 
   return (

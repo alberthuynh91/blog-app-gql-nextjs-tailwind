@@ -29,7 +29,7 @@ const Home: NextPage = ({ items }) => {
         })}
       </div>
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-        <Link href={`/cart`}>Go to cart</Link>
+        <Link href={`/cart`}>View cart</Link>
       </button>
     </div>
   );

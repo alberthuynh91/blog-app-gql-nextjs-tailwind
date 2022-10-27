@@ -3,7 +3,6 @@ import React from 'react';
 const Item = ({ item, cart, setCart }) => {
   const handleAddToCart = () => {
     const tempCart = Object.assign({}, cart);
-    console.log(`trying to add to cart with item: `, item);
     if (tempCart[item.id]) {
       tempCart[item.id].quantity++;
       setCart(tempCart);

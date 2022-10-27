@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CartItem } from '../../components';
 
@@ -27,7 +26,6 @@ const Cart = () => {
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(`useEfect in cart page: `, cart);
     if (cart) {
       setCart(cart);
     }
